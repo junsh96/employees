@@ -41,7 +41,7 @@ public class DepartmentsDao {
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
 		try {
-			//드라이브 이름
+			
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn=DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
 			stmt=conn.prepareStatement(sql);
@@ -50,7 +50,7 @@ public class DepartmentsDao {
 				count=rs.getInt("COUNT(*)");
 			}
 			
-		}catch(Exception e) { // 자바의 변수 생명주기는 {} 
+		}catch(Exception e) { 
 			e.printStackTrace();
 		}finally {
 			try {
