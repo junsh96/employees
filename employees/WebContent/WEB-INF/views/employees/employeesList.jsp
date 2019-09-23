@@ -1,46 +1,51 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-	<h1>»ç¿ø ¸ñ·Ï</h1>
-	<form method="get" action="${pageContext.request.contextPath}/employees/getEmployeesList">
-		<select name ="limit">
-			<option value="10">10</option>
-			<option value="20">20</option>
-			<option value="30">30</option>
-			<option value="40">40</option>
-			
-		</select>°³¾¿ º¸±â
-		<button type = "submit">»ç¿ø¸ñ·Ï</button>
-	</form>
-	<table border="1">
-		<thead>
-			<tr>
-				<th>»ç¿ø¹øÈ£</th>
-				<th>»ç¿ø»ıÀÏ</th>
-				<th>»ç¿øÀÌ¸§</th>
-				<th>»ç¿ø¼º</th>
-				<th>»ç¿ø¼ºº°</th>
-				<th>»ç¿øÀÔ»ç³¯Â¥</th>
-			</tr>
-		</thead>
-		<c:forEach var="employees" items="${list}">
-			<tr>
-				<td>${employees.empNo}</td>
-				<td>${employees.birthDate}</td>
-				<td>${employees.firstName}</td>
-				<td>${employees.lastName}</td>
-				<td>${employees.gender}</td>
-				<td>${employees.hireDate}</td>
-			</tr>
-		</c:forEach>
-				
-	</table>
+<body class="container">
+	<h1>ì‚¬ì› ëª©ë¡</h1>
+		<%
+			//List<Employees> list = (List<Employees>)request.getAttribute("list"); ìë°”ë¡œ ì„ ì–¸í•œë°©ì‹
+			//${list} elë¡œ ê°€ì ¸ì˜¤ëŠ”ë°©ì‹
+		%>
+		<form method="get" action="<%=request.getContextPath()%>/employees/getEmployeesList">
+			<select name="limit">
+				<option value="10">10ê°œì”©</option>
+				<option value="20">20ê°œì”©</option>
+				<option value="30">30ê°œì”©</option>
+				<option value="40">40ê°œì”©</option>
+				<option value="50">50ê°œì”©</option>
+			</select>
+			<button type="submit">í™•ì¸</button>
+		
+		<table border = "1">
+			<thead>
+				<tr>
+					<th>ì‚¬ì› ë²ˆí˜¸</th>
+					<th>ì‚¬ì› ìƒì¼</th>
+					<th>ì‚¬ì› ì„±</th>
+					<th>ì‚¬ì› ì´ë¦„</th>
+					<th>ì‚¬ì› ì„±ë³„</th>
+					<th>ì…ì‚¬ ë‚ ì§œ</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="employees" items="${list}">
+					<tr>
+						<td>${employees.getEmpNo()}</td>
+						<td>${employees.getBirthDate()}</td>
+						<td>${employees.getFirstName()}</td>
+						<td>${employees.getLastName()}</td>
+						<td>${employees.getGender()}</td>
+						<td>${employees.getHireDate()}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		</form>
 </body>
 </html>
