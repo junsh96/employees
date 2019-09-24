@@ -9,6 +9,8 @@ import vo.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import DB.DBHelper;
+import DB.DBHelper;
 public class EmployeesDao {
 	
 	public List<Employees> selectEmployeesListOrderBy(String order){
@@ -26,8 +28,7 @@ public class EmployeesDao {
 			sql = "select emp_no, birth_date, first_name, last_name, gender, hire_date from employees order by first_name desc limit 50";
 		}
 			try {
-				Class.forName("org.mariadb.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/employees","root","java1234");
+				conn = DBHelper.getConnection();
 				stmt = conn.prepareStatement(sql);
 				rs = stmt.executeQuery();
 				while(rs.next()) {
@@ -43,13 +44,7 @@ public class EmployeesDao {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}finally {
-				try {
-					rs.close();
-					stmt.close();
-					conn.close();
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
+				DBHelper.close(rs, stmt, conn);
 			}
 			return list;
 	}
@@ -64,8 +59,7 @@ public class EmployeesDao {
 		
 		
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn=DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
+			conn = DBHelper.getConnection();
 			stmt=conn.prepareStatement(sql);
 			stmt.setInt(1,limit);
 			rs=stmt.executeQuery();
@@ -84,14 +78,7 @@ public class EmployeesDao {
 		}catch(Exception e) {
 			
 		}finally {
-			try {
-				rs.close();
-				stmt.close();
-				conn.close();
-				
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+			DBHelper.close(rs, stmt, conn);
 		}
 		
 		
@@ -107,8 +94,7 @@ public class EmployeesDao {
 		ResultSet rs = null;
 		try {
 			//드라이브 이름
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn=DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
+			conn = DBHelper.getConnection();
 			stmt=conn.prepareStatement(sql);
 			rs=stmt.executeQuery();
 			if(rs.next()) {
@@ -118,14 +104,7 @@ public class EmployeesDao {
 		}catch(Exception e) { // 자바의 변수 생명주기는 {} 
 			e.printStackTrace();
 		}finally {
-			try {
-				rs.close();
-				stmt.close();
-				conn.close();
-				
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+			DBHelper.close(rs, stmt, conn);
 		}
 	
 		

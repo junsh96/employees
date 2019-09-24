@@ -2,6 +2,7 @@ package model;
 import java.sql.*;
 import java.util.*;
 import vo.*;
+import DB.DBHelper;
 public class DepartmentsDao {
 	public List <Departments> selectDepartmentsList(){
 		List<Departments> list = new ArrayList<Departments>();
@@ -10,8 +11,7 @@ public class DepartmentsDao {
 		ResultSet rs = null;
 		String sql = "SELECT dept_no, dept_name FROM departments";
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/employees","root","java1234");
+			conn = DBHelper.getConnection();
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
@@ -23,13 +23,7 @@ public class DepartmentsDao {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			try {
-				rs.close();
-				stmt.close();
-				conn.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+			DBHelper.close(rs, stmt, conn);
 		}
 		return list;
 	}
@@ -42,8 +36,7 @@ public class DepartmentsDao {
 		ResultSet rs = null;
 		try {
 			
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn=DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
+			conn = DBHelper.getConnection();
 			stmt=conn.prepareStatement(sql);
 			rs=stmt.executeQuery();
 			if(rs.next()) {
@@ -53,14 +46,7 @@ public class DepartmentsDao {
 		}catch(Exception e) { 
 			e.printStackTrace();
 		}finally {
-			try {
-				rs.close();
-				stmt.close();
-				conn.close();
-				
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+			DBHelper.close(rs, stmt, conn);
 		}
 	
 		
