@@ -55,6 +55,7 @@
 			<li><a href="${pageContext.request.contextPath}/salaries/getSalariesStatistics">연봉 통계값(count,sum,avg,max,min,std)</a>
 			<li><a href="${pageContext.request.contextPath}/employees/getEmployeesCountByGender">사원 수(성별group by gender)</a></li>
 			<li><a href="${pageContext.request.contextPath}/departments/getDepartmentsCountByDeptNo">부서별 사원 수</a></li>
+			<li><a href = "${pageContext.request.contextPath}/employees/getEmployeesListByPage">사원목록 페이징(10명씩)</a></li>
 		</ul>
 	</div>
 	<div>
